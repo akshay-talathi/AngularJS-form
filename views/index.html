@@ -90,7 +90,7 @@
             <p class="help-block" ng-if="userForm.email.$error.required && userForm.email.$touched && userForm.address.$valid">The user's email is required</p>
             <p class="help-block" ng-if="userForm.email.$error.email">The email address is invalid</p>
             <p class="help-block" ng-if="(userForm.phone.$error.required || userForm.phone.$error.number)&& userForm.email.$valid">Valid phone number is required</p>
-            <p class="help-block" ng-if="((userForm.phone.$error.minlength || userForm.phone.$error.maxlength))">phone number should be 10 digits</p>
+            <p class="help-block" ng-if="((userForm.phone.$error.minlength || userForm.phone.$error.maxlength)) && userForm.email.$valid && userForm.address.$valid && userForm.name.$valid">phone number should be 10 digits</p>
             <br>
             <input type="submit" id="submit"  class="btn btn-primary" ng-show="userForm.phone.$touched && userForm.phone.$valid && userForm.email.$valid && userForm.address.$valid && userForm.name.$valid">
             <button class="btn btn-link" ng-click="reset()">Reset</button>
