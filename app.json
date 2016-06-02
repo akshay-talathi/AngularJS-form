@@ -1,0 +1,6 @@
+{
+  "name": "Angular JS Form",
+  "description": "A Node.js app using Express 4",
+  "repository": "https://github.com/akshay-talathi/AngularJS-form.git",
+  "keywords": ["node", "express", "static"]
+}

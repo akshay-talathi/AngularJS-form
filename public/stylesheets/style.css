@@ -1,0 +1,36 @@
+body {
+
+    margin: 0;
+    padding: 10 px;
+}
+h1 {
+    color: #000000;
+    text-align : center;
+    font-family: "SIMPSON";
+}
+form {
+    width: 70% ;
+    margin: 0 auto;
+}
+
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top:-200px;
+  left: 200px;
+}
+
+
+.form-group .help-block {
+  display: none;
+}
+ 
+.form-group.has-error .help-block {
+  display: block;
+}
+
+input.transparent-input{
+       background-color:rgba(0,0,0,0) !important;
+       border:none !important;
+    }

@@ -1,0 +1,99 @@
+<html>
+   <head>
+      <title> User Form</title>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" media="all" />
+      <script src="../javascripts/form.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+      <script src="http://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js&libraries=places"></script>
+   </head>
+   <body ng-app="app" >
+      <h1>Add New User</h1>
+      <form name="userForm" ng-submit="save()" ng-controller="NewUserController">
+         <div class="form-group" show-errors='{showSuccess: true}'>
+            <label class="col-md-1 control-label">Name</label>
+            <input type="text" class="form-control transparent-input" name="name" ng-model="user.name" ng-required="true" placeholder="Name" autofocus />
+         </div>
+         <div ng-show="userForm.name.$touched && userForm.name.$valid">
+         <div class="form-group" show-errors='{showSuccess: true}'>
+            <label class="col-md-6 control-label">Enter Address</label>
+            <div  class="">
+               <input type="text"
+                  class="form-control transparent-input" name="address" ng-model="user.address"  ng-required="true"
+                  ng-address-autocomplete   
+                  street-name="user.streetName" 
+                  city="user.city"
+                  zip-code="user.zipCode"
+                  country="user.country"
+                  street-number="user.streetNumber" />
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="col-md-6 form-group">
+               <label class="control-label">Street Number</label>
+               <div>
+                  <input type="text" class="form-control transparent-input" 
+                     ng-model="user.streetNumber"/> 
+               </div>
+            </div>
+            <div class="col-md-6 form-group">
+               <label class="control-label">Street</label>
+               <div>
+                  <input type="text" 
+                     class="form-control transparent-input"  name="street" ng-model="user.streetName"/> 
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="col-md-6 form-group">
+               <label class="col-md-6  control-label"  >City</label>
+               <div>
+                  <input type="text" 
+                     class="form-control transparent-input" name="city" ng-model="user.city"/> 
+               </div>
+            </div>
+            <div class="col-md-6 form-group">
+               <label class="col-md-6 control-label  "  >Zip Code</label>
+               <div>
+                  <input type="text" 
+                     class="form-control transparent-input" name="zip" ng-model="user.zipCode"/> 
+               </div>
+            </div>
+            <div class="col-md-12 form-group">
+               <label class="col-md-6 control-label"  >Country</label>
+               <div>
+                  <input type="text" 
+                     class="form-control transparent-input" name="country" ng-model="user.country"/> 
+               </div>
+            </div>
+         </div>
+         <div class="form-group" show-errors='{showSuccess: true}' ng-show="userForm.address.$touched && userForm.address.$valid && userForm.name.$valid">
+            <label class="col-md-1 control-label">Email</label> 
+            <input type="email" class="form-control transparent-input" name="email" ng-model="user.email" ng-required="true" placeholder="Email" />
+         </div>
+         <div class="form-group" show-errors='{showSuccess: true}' ng-show="userForm.email.$touched && userForm.email.$valid && userForm.address.$valid && userForm.name.$valid">
+            <label class="col-md-7 control-label">Phone Number</label> 
+            <input type="number" class="form-control transparent-input" ng-minlength="10" ng-maxlength="10"  id="inputPhone" name="phone" placeholder="Phone" ng-model="user.phone" ng-required="true">
+         </div>
+         <div class="col-md-1"></div>
+         <div class="col-md-11">
+            <p class="help-block" ng-if="userForm.name.$error.required && userForm.name.$touched">The user's name is required</p>
+            <p class="help-block" ng-if="userForm.address.$error.required && userForm.address.$touched && userForm.name.$valid">The user's address is required</p>
+            <p class="help-block" ng-if="userForm.email.$error.required && userForm.email.$touched && userForm.address.$valid">The user's email is required</p>
+            <p class="help-block" ng-if="userForm.email.$error.email">The email address is invalid</p>
+            <p class="help-block" ng-if="(userForm.phone.$error.required || userForm.phone.$error.number)&& userForm.email.$valid">Valid phone number is required</p>
+            <p class="help-block" ng-if="((userForm.phone.$error.minlength || userForm.phone.$error.maxlength))">phone number should be 10 digits</p>
+            <br>
+            <input type="submit" id="submit"  class="btn btn-primary" ng-show="userForm.phone.$touched && userForm.phone.$valid && userForm.email.$valid && userForm.address.$valid && userForm.name.$valid">
+            <button class="btn btn-link" ng-click="reset()">Reset</button>
+         </div>
+         <br>
+      </form>
+   </body>
+</html>
