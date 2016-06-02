@@ -9,7 +9,7 @@ var express = require('express')
 var app = express();
 
 //all environments
-app.set('port', 3000);
+app.set('port', 3030);
 
 app.use(express.static(__dirname + '/views'));
 app.use(express.static('./public'));
