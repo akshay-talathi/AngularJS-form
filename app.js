@@ -20,7 +20,9 @@ app.use(bodyParser.json());
 
 var db;
 
-mongoClient.connect("mongodb://"+config.mongo.user_name+":"+config.mongo.password+"@ds011379.mlab.com:11379/saveusers", function(err, database) {
+
+
+mongoClient.connect("mongodb://heroku_x252d2s8:jmthbtm8nno0h9q479rqojkdic@ds021663.mlab.com:21663/heroku_x252d2s8", function(err, database) {
   if(err) {
     throw err;
   }
