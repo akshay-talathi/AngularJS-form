@@ -80,7 +80,7 @@
          $scope.$broadcast('show-errors-check-validity');
 
          if ($scope.userForm.$valid) {
-             alert('User saved ! Thank You');
+             alert('User saved to MongoDB! Thank You');
              $http.post('/add', {
                  user: $scope.user
              });
